@@ -18,11 +18,20 @@
   },
   "homepage": "https://github.com/yoh1496/personium-sdk-ts#readme",
   "devDependencies": {
+    "@types/request-promise": "^4.1.46",
+    "@types/xmldom": "^0.1.29",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
+    "axios": "^0.19.2",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.5",
+    "xmldom": "^0.3.0",
+    "xpath": "0.0.27"
+  },
+  "dependencies": {
+    "tunnel": "0.0.6"
   }
 }
