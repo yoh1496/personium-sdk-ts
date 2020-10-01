@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { PersoniumAccessToken, PersoniumClient } from "./common";
-import xpath from "xpath";
-import { DOMParser } from "xmldom";
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { PersoniumAccessToken, PersoniumClient } from './common';
+import xpath from 'xpath';
+import { DOMParser } from 'xmldom';
 
 export type XMLElement = {
   localName: string;
@@ -20,22 +20,22 @@ export function composeXMLACL(acls: Array<ACE>): string {
   const baseStrAce =
     '<ace xmlns="DAV:" xmlns:p="urn:x-personium:xmlns"><principal></principal><grant><privilege></privilege></grant></ace>';
   const select = xpath.useNamespaces({
-    D: "DAV:",
-    p: "urn:x-personium:xlmns",
+    D: 'DAV:',
+    p: 'urn:x-personium:xlmns',
   });
 
   const basedom = new DOMParser().parseFromString(baseStr);
-  const aclNode = select("/D:acl", basedom, true) as Attr;
+  const aclNode = select('/D:acl', basedom, true) as Attr;
 
   for (const acl of acls) {
     const acedom = new DOMParser().parseFromString(baseStrAce);
     const { principal, privileges } = acl;
     const { namespaceURI, localName } = principal;
-    (select("/D:ace/D:principal", acedom, true) as Attr).appendChild(
+    (select('/D:ace/D:principal', acedom, true) as Attr).appendChild(
       acedom.createElementNS(namespaceURI, localName)
     );
     const privilegeNode = select(
-      "/D:ace/D:grant/D:privilege",
+      '/D:ace/D:grant/D:privilege',
       acedom,
       true
     ) as Attr;
@@ -67,7 +67,7 @@ export async function statFile(
 ): Promise<string> {
   const config = client.prepareConfig({
     // @ts-expect-error because there is not `PROPFIND` in Methods of axios
-    method: "PROPFIND",
+    method: 'PROPFIND',
     headers: {
       // Accept: "text/plain",
       Depth: 0,
@@ -87,7 +87,7 @@ export async function updateProperty(
   access_token: string,
   { set, remove }: { set?: Array<XMLElement>; remove?: Array<XMLElement> }
 ): Promise<Array<XMLElement>> {
-  const config = client.prepareConfig({ data: "" });
+  const config = client.prepareConfig({ data: '' });
 
   const response = await axios(url, config);
   console.log(response);

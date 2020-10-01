@@ -1,4 +1,4 @@
-import { AxiosRequestConfig, AxiosInterceptorManager } from "axios";
+import { AxiosRequestConfig, AxiosInterceptorManager } from 'axios';
 
 export interface PersoniumAccessToken {
   access_token: string;
@@ -30,16 +30,16 @@ export class PersoniumClient {
 
   public prepareConfig(requestConfig: AxiosRequestConfig): AxiosRequestConfig {
     if (this._tokens === undefined) {
-      throw new Error("not authorized");
+      throw new Error('not authorized');
     }
 
     const commonConfig: AxiosRequestConfig = {
       headers: {
         Authorization: `Bearer ${this._tokens.access_token}`,
-        "Content-Type": "application/xml",
-        Accept: "application/xml",
+        'Content-Type': 'application/xml',
+        Accept: 'application/xml',
       },
-      responseType: "text",
+      responseType: 'text',
       httpAgent: this._httpAgent,
       httpsAgent: this._httpsAgent,
     };

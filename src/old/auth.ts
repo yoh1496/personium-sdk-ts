@@ -1,10 +1,10 @@
-import axios from "axios";
-import { PersoniumAccessToken } from "./common";
+import axios from 'axios';
+import { PersoniumAccessToken } from './common.bk';
 
 function composeFormBody(data: Record<string, string>) {
   return Object.entries(data)
     .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-    .join("&");
+    .join('&');
 }
 
 interface PersoiniumAuthHandler {
@@ -17,9 +17,9 @@ export class PersoniumLoginROPC {
   private _loginAsync: Promise<PersoniumAccessToken> | null = null;
   private _refreshAsync: Promise<unknown> | null = null;
 
-  private _targetCell = "";
-  private _username = "";
-  private _password = "";
+  private _targetCell = '';
+  private _username = '';
+  private _password = '';
   private _httpsAgent: unknown = null;
   private _httpAgent: unknown = null;
 
@@ -39,31 +39,31 @@ export class PersoniumLoginROPC {
 
   public async loginAsync(): Promise<PersoniumAccessToken> {
     if (this._loginAsync !== null) {
-      console.log("`loginAsync` is already started");
+      console.log('`loginAsync` is already started');
       return this._loginAsync;
     }
 
-    console.log("`loginAsync` is started newly");
+    console.log('`loginAsync` is started newly');
 
     return (this._loginAsync = new Promise((resolve, reject) => {
       const data = new URLSearchParams();
-      data.append("grant_type", "password");
-      data.append("username", this._username);
-      data.append("password", this._password);
+      data.append('grant_type', 'password');
+      data.append('username', this._username);
+      data.append('password', this._password);
       console.log(data);
 
       axios(`${this._targetCell}__token`, {
         withCredentials: true,
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         data: data,
         httpAgent: this._httpAgent,
         httpsAgent: this._httpsAgent,
-        responseType: "json",
+        responseType: 'json',
       })
-        .then((response) => {
+        .then(response => {
           this._loginAsync = null;
           resolve(response.data);
         })
