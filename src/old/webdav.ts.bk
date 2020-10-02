@@ -1,6 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { PersoniumAccessToken, PersoniumClient } from './common';
+
+// @ts-expect-error because there are no types package
 import xpath from 'xpath';
+// @ts-expect-error because there are no types package
 import { DOMParser } from 'xmldom';
 
 export type XMLElement = {

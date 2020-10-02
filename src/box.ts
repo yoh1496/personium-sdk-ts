@@ -1,13 +1,15 @@
 import { PersoniumCellUrl } from './common';
 
-export interface GetBoxListResult {
-  d: BoxList;
-}
+export type ODataResult<T> = {
+  d: ODataResultInternal<T>;
+};
 
-export interface BoxList {
-  results: Array<BoxItem>;
-  __count: string;
-}
+export type ODataResultInternal<T> = {
+  results: Array<T>;
+  __count?: string;
+};
+
+export type GetBoxListResult = ODataResult<BoxItem>;
 
 type PersoniumDate = string;
 
